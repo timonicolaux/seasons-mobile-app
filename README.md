@@ -1,4 +1,4 @@
-## Seasons Mobile app 👋
+## Seasons Mobile app
 
 This mobile app is a personnal project allowing you to retrieve all the seasonal information for fruits and vegetables based on all the months of the year.
 It is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
