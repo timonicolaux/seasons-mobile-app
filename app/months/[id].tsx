@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams } from "expo-router";
-import { getMonthList } from "@/services/api";
+import { getMonthDetail } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import React from "react";
 import {
@@ -16,10 +16,10 @@ import ProductCard from "@/components/ProductCard";
 const MonthDetails = () => {
   const { id } = useLocalSearchParams();
   const {
-    data: monthList,
-    loading: monthListLoading,
-    error: monthListError,
-  } = useFetch(() => getMonthList());
+    data: monthDetail,
+    loading: monthDetailLoading,
+    error: monthDetailError,
+  } = useFetch(() => getMonthDetail(parseInt(id as string)));
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.monthHeaderContainer}>
@@ -30,21 +30,21 @@ const MonthDetails = () => {
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}
         />
-        <Text style={styles.mainTitle}>{id}</Text>
+        <Text style={styles.mainTitle}>{monthDetail?.name}</Text>
       </View>
       <View style={styles.monthInfoContainer}>
         <View style={styles.categoryTitleContainer}>
-          <Text style={styles.categoryTitle}>Légumes</Text>
+          <Text style={styles.categoryTitle}>Fruits</Text>
         </View>
         <View style={styles.categoryListContainer}>
-          {monthListLoading ? (
+          {monthDetailLoading ? (
             <ActivityIndicator size="large" color="" />
-          ) : monthListError ? (
-            <Text>Error: {monthListError?.message}</Text>
+          ) : monthDetailError ? (
+            <Text>Error: {monthDetailError?.message}</Text>
           ) : (
             <FlatList
-              data={monthList}
-              renderItem={({ item }) => <ProductCard />}
+              data={monthDetail?.products.categories.fruit}
+              renderItem={({ item }) => <ProductCard {...item} />}
               keyExtractor={(item: any) => item.id.toString()}
               numColumns={2}
               columnWrapperStyle={{ justifyContent: "space-between" }}

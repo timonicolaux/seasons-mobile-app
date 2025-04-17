@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 const MonthCard = ({ id, name }: Month) => {
   return (
-    <Link href={`/months/${name}`} asChild>
+    <Link href={`/months/${id}`} asChild>
       <TouchableOpacity style={styles.container}>
         <Text style={styles.text}>{name}</Text>
       </TouchableOpacity>

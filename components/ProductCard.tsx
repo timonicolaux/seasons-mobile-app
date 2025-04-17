@@ -1,11 +1,11 @@
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
-const ProductCard = () => {
+const ProductCard = ({ id, name, image_link, category }: Product) => {
   return (
     <TouchableOpacity style={styles.mainContainer}>
-      <View style={styles.image}></View>
-      <Text style={styles.text}>ProductCard</Text>
+      <Image source={{ uri: image_link }} style={styles.image}></Image>
+      <Text style={styles.text}>{name}</Text>
     </TouchableOpacity>
   );
 };
