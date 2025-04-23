@@ -8,6 +8,8 @@ SplashScreen.preventAutoHideAsync();
 const Layout = () => {
   const [fontsLoaded, error] = useFonts({
     "Boldonse-Regular": require("../../assets/fonts/Boldonse-Regular.ttf"),
+    "Roboto-Medium": require("../../assets/fonts/Roboto-Medium.ttf"),
+    "Roboto_SemiCondensed-ExtraBoldItalic": require("../../assets/fonts/Roboto_SemiCondensed-ExtraBoldItalic.ttf"),
   });
   useEffect(() => {
     if (fontsLoaded || error) {

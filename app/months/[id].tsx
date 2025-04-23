@@ -3,15 +3,11 @@ import { useLocalSearchParams } from "expo-router";
 import { getMonthDetail } from "@/services/api";
 import useFetch from "@/services/useFetch";
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  ActivityIndicator,
-  FlatList,
-} from "react-native";
-import ProductCard from "@/components/ProductCard";
+import { StyleSheet, View, Text, SafeAreaView, ScrollView } from "react-native";
+import ProductList from "@/components/ProductList";
+
+const backgroundImageFruit = require("../../assets/images/gribouilli1.png");
+const backgroundImageVegetable = require("../../assets/images/gribouilli2.png");
 
 const MonthDetails = () => {
   const { id } = useLocalSearchParams();
@@ -33,28 +29,25 @@ const MonthDetails = () => {
         <Text style={styles.mainTitle}>{monthDetail?.name}</Text>
       </View>
       <View style={styles.monthInfoContainer}>
-        <View style={styles.categoryTitleContainer}>
-          <Text style={styles.categoryTitle}>Fruits</Text>
-        </View>
-        <View style={styles.categoryListContainer}>
-          {monthDetailLoading ? (
-            <ActivityIndicator size="large" color="" />
-          ) : monthDetailError ? (
-            <Text>Error: {monthDetailError?.message}</Text>
-          ) : (
-            <FlatList
-              data={monthDetail?.products.categories.fruit}
-              renderItem={({ item }) => <ProductCard {...item} />}
-              keyExtractor={(item: any) => item.id.toString()}
-              numColumns={2}
-              columnWrapperStyle={{ justifyContent: "space-between" }}
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{
-                paddingVertical: 16,
-              }}
-            />
-          )}
-        </View>
+        <ScrollView
+          style={styles.scrollContainer}
+          showsVerticalScrollIndicator={false}
+        >
+          <ProductList
+            title="Fruits"
+            data={monthDetail?.products?.categories.fruit ?? []}
+            backgroundImage={backgroundImageFruit}
+            monthDetailLoading={monthDetailLoading}
+            monthDetailError={monthDetailError}
+          />
+          <ProductList
+            title="Légumes"
+            data={monthDetail?.products?.categories.légume ?? []}
+            backgroundImage={backgroundImageVegetable}
+            monthDetailLoading={monthDetailLoading}
+            monthDetailError={monthDetailError}
+          />
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -73,13 +66,10 @@ const styles = StyleSheet.create({
   monthInfoContainer: {
     flex: 2,
     alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#D96B68",
   },
+  scrollContainer: {},
   mainTitle: { fontFamily: "Boldonse-Regular", fontSize: 50 },
-  categoryTitleContainer: {},
-  categoryTitle: { textAlign: "center" },
-  categoryListContainer: {},
 });
 
 export default MonthDetails;

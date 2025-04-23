@@ -14,6 +14,14 @@ interface Product {
   category: string;
 }
 
+interface ProductList {
+  title: string;
+  data: Product[];
+  backgroundImage: any;
+  monthDetailLoading: boolean;
+  monthDetailError: Error | null;
+}
+
 interface ProductCategories {
   [category: string]: Product[];
 }

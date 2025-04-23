@@ -36,7 +36,11 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/Boldonse-Regular.ttf"]
+          "fonts": [
+            "./assets/fonts/Boldonse-Regular.ttf",
+            "./assets/fonts/Roboto-Medium.ttf",
+            "./assets/fonts/Roboto_SemiCondensed-ExtraBoldItalic.ttf"
+          ]
         }
       ]
     ],
